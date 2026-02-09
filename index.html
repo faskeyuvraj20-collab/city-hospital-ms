@@ -424,6 +424,48 @@ footer p{
   opacity:0.75;
   margin-top:30px;
 }
+.footer{
+  background:#0f2a44;
+  color:#ffffff;
+  padding:60px 40px 30px;
+}
+
+.footer-container{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  text-align:left;
+}
+
+.footer-box h3{
+  font-size:20px;
+  margin-bottom:16px;
+  color:#ffffff;
+}
+
+.footer-box p{
+  font-size:15px;
+  margin-bottom:8px;
+  opacity:0.95;
+}
+
+.footer-bottom{
+  margin-top:50px;
+  text-align:center;
+  font-size:14px;
+  opacity:0.8;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .footer-container{
+    grid-template-columns:1fr;
+    gap:40px;
+    text-align:center;
+  }
+}
 
   </style>
 </head>
@@ -517,20 +559,22 @@ footer p{
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-center">
+<footer class="footer">
+  <div class="footer-container">
 
+    <!-- LEFT PART -->
     <div class="footer-box">
-      <h4>Visit Us</h4>
-      <p>
-        City Hospital Kolhapur<br>
-        Shivaji Nagar, Kolhapur<br>
-        Maharashtra – 416001
-      </p>
+      <h3>Visit Us</h3>
+      <p>City Hospital Kolhapur</p>
+      <p>Shivaji Nagar, Kolhapur</p>
+      <p>Maharashtra – 416001</p>
       <p>🕒 Open 24×7 (Emergency)</p>
       <p>OPD: 9:00 AM – 8:00 PM</p>
+    </div>
 
-      <h4 style="margin-top:20px;">Emergency & Support</h4>
+    <!-- RIGHT PART -->
+    <div class="footer-box">
+      <h3>Emergency & Support</h3>
       <p>🚑 Ambulance: <strong>108</strong></p>
       <p>☎ Reception: +91 231 265 XXXX</p>
       <p>✉ support@hms.com</p>
@@ -538,13 +582,13 @@ footer p{
 
   </div>
 
-  <p class="footer-privacy">
-    This system follows basic healthcare data privacy principles.
-    Patient information is securely stored and access is role-based.
-  </p>
-
+  <!-- BOTTOM TEXT -->
   <div class="footer-bottom">
-    © 2026 HMS. All rights reserved.
+    <p>
+      This system follows basic healthcare data privacy principles.
+      Patient information is securely stored and access is role-based.
+    </p>
+    <p>© 2026 HMS. All rights reserved.</p>
   </div>
 </footer>
 
@@ -645,3 +689,4 @@ footer p{
 
 </body>
 </html>
+
