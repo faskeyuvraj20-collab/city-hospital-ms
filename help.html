@@ -1,153 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Help & Feedback | City Hospital Kolhapur</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Complaint & Feedback | City Hospital Kolhapur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f2a44;
+            --accent-orange: #ff9800;
+            --accent-red: #d93025;
+            --bg-light: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
 
-  <style>
-    *{box-sizing:border-box;font-family:Inter,sans-serif}
-    body{margin:0;background:#f4f7fb;color:#1f2937}
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { 
+            margin: 0; 
+            background: var(--bg-light); 
+            color: var(--text-main);
+            line-height: 1.6;
+        }
 
-    header{
-      background:#0f2a44;
-      color:#fff;
-      padding:18px 60px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-    }
-    header a{color:#fff;text-decoration:none;font-weight:600}
+        /* Improved Header */
+        header {
+            background: var(--primary);
+            color: #fff;
+            padding: 1rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-    .container{
-      max-width:1100px;
-      margin:auto;
-      padding:70px 30px;
-    }
+        header h3 { margin: 0; font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
+        header a { 
+            color: #fff; 
+            text-decoration: none; 
+            font-weight: 500; 
+            opacity: 0.9;
+            transition: opacity 0.3s;
+        }
+        header a:hover { opacity: 1; text-decoration: underline; }
 
-    h1{
-      text-align:center;
-      color:#ff9800;
-      margin-bottom:50px;
-      font-size:36px;
-    }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 60px 20px;
+        }
 
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:40px;
-    }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
 
-    .card{
-      background:#fff;
-      padding:40px;
-      border-radius:20px;
-      box-shadow:0 20px 40px rgba(0,0,0,.08);
-      text-align:center;
-    }
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
 
-    .card h2{
-      margin-bottom:10px;
-    }
+        /* Modern Grid Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
 
-    .card p{
-      font-size:16px;
-      opacity:.85;
-      margin-bottom:24px;
-    }
+        .card {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
 
-    .btn{
-      border:none;
-      padding:14px 30px;
-      font-size:16px;
-      font-weight:600;
-      border-radius:999px;
-      cursor:pointer;
-      color:#fff;
-    }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
 
-    .feedback-btn{background:#ff9800}
-    .complaint-btn{background:#d93025}
+        .card h2 { font-size: 1.8rem; margin-bottom: 15px; color: var(--primary); }
+        .card p { font-size: 1rem; color: var(--text-muted); margin-bottom: 30px; }
 
-    /* MODAL */
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.6);
-      justify-content:center;
-      align-items:center;
-      z-index:1000;
-    }
+        /* Unified Button Style */
+        .btn {
+            border: none;
+            padding: 16px 35px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #fff;
+            width: 100%;
+            transition: filter 0.2s ease, transform 0.1s ease;
+        }
 
-    .modal-box{
-      background:#fff;
-      width:400px;
-      padding:30px;
-      border-radius:16px;
-    }
+        .btn:active { transform: scale(0.98); }
+        .feedback-btn { background: var(--accent-orange); }
+        .complaint-btn { background: var(--accent-red); }
+        .btn:hover { filter: brightness(1.1); }
 
-    textarea{
-      width:100%;
-      height:120px;
-      padding:12px;
-      border-radius:10px;
-      border:1px solid #ccc;
-      resize:none;
-      margin-bottom:16px;
-    }
+        /* Refined Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 42, 68, 0.7);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
 
-    .submit-btn{
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      background:#0f2a44;
-      color:#fff;
-      font-weight:600;
-      cursor:pointer;
-    }
-  </style>
+        .modal-box {
+            background: #fff;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 24px;
+            position: relative;
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-box h3 { 
+            margin: 0 0 20px 0; 
+            font-size: 1.5rem; 
+            color: var(--primary);
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            resize: none;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover { background: #1a4169; }
+
+        /* Close functionality for UX */
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
-  <h3>🏥 City Hospital Kolhapur</h3>
-  <a href="index.html">Home</a>
+    <h3>🏥 City Hospital Kolhapur</h3>
+    <a href="index.html">Home</a>
 </header>
 
 <div class="container">
-  <h1>Help & Feedback</h1>
+    <h1>Help Desk</h1>
+    <p class="subtitle">How can we assist you today? Your feedback helps us improve our care.</p>
 
-  <div class="cards">
-    <div class="card">
-      <h2>Feedback</h2>
-      <p>We value your thoughts! Let us know how we are doing.</p>
-      <button class="btn feedback-btn" onclick="openModal('feedback')">
-        Give Feedback
-      </button>
-    </div>
+    <div class="cards">
+        <div class="card">
+            <h2>Feedback</h2>
+            <p>Share your positive experience or suggestions with our hospital management.</p>
+            <button class="btn feedback-btn" onclick="openModal('feedback')">
+                Give Feedback
+            </button>
+        </div>
 
-    <div class="card">
-      <h2>Complaint</h2>
-      <p>Facing any issues? Report them to our team immediately.</p>
-      <button class="btn complaint-btn" onclick="openModal('complaint')">
-        File Complaint
-      </button>
+        <div class="card">
+            <h2>Complaint</h2>
+            <p>Encountered a problem? Please report it so we can resolve the issue immediately.</p>
+            <button class="btn complaint-btn" onclick="openModal('complaint')">
+                File Complaint
+            </button>
+        </div>
     </div>
-  </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-box">
-    <h3 id="modalTitle"></h3>
-    <textarea id="message" placeholder="Write here..."></textarea>
-    <button class="submit-btn" onclick="submitData()">Submit</button>
-  </div>
+<div class="modal" id="modal" onclick="if(event.target == this) this.style.display='none'">
+    <div class="modal-box">
+        <button class="close-modal" onclick="document.getElementById('modal').style.display='none'">&times;</button>
+        <h3 id="modalTitle"></h3>
+        <textarea id="message" placeholder="Please provide details here..."></textarea>
+        <button class="submit-btn" onclick="submitData()">Submit Details</button>
+    </div>
 </div>
 
 <script type="module" src="./js/help.js"></script>
