@@ -3,6 +3,8 @@ import {
   collection,
   getDocs,
   addDoc,
+  updateDoc,
+  doc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -11,11 +13,11 @@ const doctorSelect = document.getElementById("doctorSelect");
 
 const loadDoctors = async () => {
   const snap = await getDocs(collection(db, "doctors"));
-  snap.forEach(doc => {
-    const d = doc.data();
+  snap.forEach(d => {
+    const data = d.data();
     const option = document.createElement("option");
-    option.value = doc.id;
-    option.textContent = `${d.name} (${d.department})`;
+    option.value = d.id;
+    option.textContent = `${data.name} (${data.department})`;
     doctorSelect.appendChild(option);
   });
 };
@@ -24,6 +26,10 @@ loadDoctors();
 
 /* ================= SAVE ADMISSION ================= */
 window.saveAdmission = async function () {
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const appointmentId = urlParams.get("id");  // 🔥 IMPORTANT
+
   const patientName = document.getElementById("patientName").value;
   const doctorId = doctorSelect.value;
   const doctorName = doctorSelect.options[doctorSelect.selectedIndex]?.text;
@@ -38,6 +44,8 @@ window.saveAdmission = async function () {
   }
 
   try {
+
+    /* 1️⃣ Save admission record */
     await addDoc(collection(db, "admissions"), {
       patientName,
       doctorId,
@@ -46,12 +54,22 @@ window.saveAdmission = async function () {
       bedNumber,
       reason,
       admissionDate,
-      status: "admitted",
+      status: "Admitted",
       createdAt: serverTimestamp()
     });
 
+    /* 2️⃣ Update appointment record */
+    if (appointmentId) {
+      await updateDoc(doc(db, "appointments", appointmentId), {
+        admission: "Admitted",
+        status: "Admitted",
+        admittedAt: serverTimestamp()
+      });
+    }
+
     alert("Patient admitted successfully ✅");
     location.href = "../staff.html";
+
   } catch (err) {
     alert(err.message);
   }
